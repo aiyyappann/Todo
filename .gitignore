@@ -1,0 +1,33 @@
+# Agent Artifacts & Plans
+implementation_plan.md
+task.md
+walkthrough.md
+.agent/
+
+# IDE & Editors
+.vscode/
+.idea/
+.vs/
+*.suo
+*.user
+*.sln.docstates
+
+# .NET / C#
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+*.pdb
+*.dll
+*.exe
+
+# Node.js / Angular
+node_modules/
+dist/
+.angular/
+*.log
+coverage/
+
+# OS
+Thumbs.db
+.DS_Store
