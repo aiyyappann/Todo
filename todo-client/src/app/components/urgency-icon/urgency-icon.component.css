@@ -1,0 +1,29 @@
+.urgency {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.label {
+    font-size: 0.875rem;
+    color: var(--text-secondary, #64748b);
+}
+
+.urgency-low {
+    background-color: #22c55e;
+}
+
+.urgency-medium {
+    background-color: #f59e0b;
+}
+
+.urgency-high {
+    background-color: #ef4444;
+    box-shadow: 0 0 0 2px #fee2e2;
+}

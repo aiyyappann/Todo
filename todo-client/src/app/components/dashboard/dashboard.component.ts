@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TaskService } from '../../core/services/task.service';
-
+import { StatusBadgeComponent } from '../status-badge/status-badge.component';
 import { TaskStats } from '../../core/models/task.model';
 
 @Component({

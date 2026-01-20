@@ -1,0 +1,12 @@
+<nav class="navbar">
+    <div class="logo">
+        <a routerLink="/">TaskMaster</a>
+    </div>
+    <ul class="nav-links">
+        <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+        <li><a routerLink="/tasks" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Tasks</a></li>
+
+        <li><a routerLink="/tasks/completed" routerLinkActive="active">Completed</a></li>
+        <li><a routerLink="/tasks/deleted" routerLinkActive="active">Deleted</a></li>
+    </ul>
+</nav>

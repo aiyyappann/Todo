@@ -74,7 +74,7 @@ public class TasksController : ControllerBase
         catch (InvalidOperationException ex) { return BadRequest(ex.Message); }
     }
     
-    // Using a generic status update endpoint might be cleaner, but sticking to specific actions for now
+    
     [HttpPut("{id:guid}/reset")]
     public async Task<IActionResult> ResetTask(Guid id)
     {

@@ -1,18 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @Component({
-    selector: 'app-root',
-    standalone: true,
-    imports: [RouterOutlet, NavbarComponent],
-    template: `
-    <app-navbar></app-navbar>
-    <main class="container">
-      <router-outlet></router-outlet>
-    </main>
-  `
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, NavbarComponent],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    title = 'todo-client';
+  title = 'todo-client';
 }

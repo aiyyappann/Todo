@@ -8,7 +8,7 @@ import { Observable, tap } from 'rxjs';
 })
 export class TaskService {
     private http = inject(HttpClient);
-    private apiUrl = 'http://localhost:5000/tasks'; // Assuming ASP.NET runs here, modify if needed
+    private apiUrl = 'http://localhost:5000/tasks'; 
 
     // Signals for state - can be extended for reactive UI
     tasks = signal<Task[]>([]);

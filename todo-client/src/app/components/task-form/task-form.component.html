@@ -1,0 +1,41 @@
+<div class="card form-card">
+    <h2>Create New Task</h2>
+
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input id="title" type="text" formControlName="title" placeholder="What needs to be done?">
+            <div class="error" *ngIf="taskForm.get('title')?.touched && taskForm.get('title')?.invalid">
+                Title is required
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="deadlineDate">Deadline Date</label>
+                <input id="deadlineDate" type="date" formControlName="deadlineDate">
+            </div>
+
+            <div class="form-group">
+                <label for="deadlineTime">Deadline Time (Optional)</label>
+                <input id="deadlineTime" type="time" formControlName="deadlineTime">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="urgency">Urgency</label>
+            <select id="urgency" formControlName="urgency">
+                <option [ngValue]="0">Low</option>
+                <option [ngValue]="1">Medium</option>
+                <option [ngValue]="2">High</option>
+            </select>
+        </div>
+
+        <div class="actions">
+            <button type="button" class="btn btn-ghost" routerLink="/tasks">Cancel</button>
+            <button type="submit" class="btn btn-primary" [disabled]="taskForm.invalid || isSubmitting">
+                {{ isSubmitting ? 'Creating...' : 'Create Task' }}
+            </button>
+        </div>
+    </form>
+</div>

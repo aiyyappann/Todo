@@ -1,0 +1,77 @@
+    <div class="page-header flex justify-between items-center mb-4">
+      <h1>{{ pageTitle }}</h1>
+      <button class="btn btn-primary" routerLink="/tasks/new" *ngIf="currentStatus !== 3">+ New Task</button>
+    </div>
+
+    <!-- Actions for Deleted items -->
+    <div *ngIf="currentStatus === 3 && (tasks$()?.length??0) > 0" class="alert-info mt-4 mb-4">
+      <p>Deleted tasks can be restored or permanently removed.</p>
+    </div>
+
+    <!-- Filters & Search -->
+    <div class="filters-bar card p-4 mb-4 flex gap-4 items-end flex-wrap" *ngIf="false">
+      <div class="form-group flex-1">
+        <label>Search</label>
+        <input type="text" [ngModel]="searchQuery" (ngModelChange)="onSearch($event)" placeholder="Search by title..." class="form-control">
+      </div>
+      
+      <div class="form-group" *ngIf="currentStatus === undefined"> <!-- Only show status filter on main list -->
+        <label>Status</label>
+        <select [(ngModel)]="filterStatus" (change)="onSearch()" class="form-control">
+          <option [ngValue]="undefined">All Active</option>
+          <option [ngValue]="0">Created</option>
+          <option [ngValue]="1">In Progress</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Priority</label>
+        <select [(ngModel)]="filterUrgency" (change)="onSearch()" class="form-control">
+          <option [ngValue]="undefined">All Priorities</option>
+          <option [ngValue]="0">Low</option>
+          <option [ngValue]="1">Medium</option>
+          <option [ngValue]="2">High</option>
+        </select>
+      </div>
+
+
+    </div>
+
+    <div class="task-list mt-4" *ngIf="tasks$() as tasks">
+      <div *ngIf="loading">Loading...</div>
+
+      <div class="card task-item" *ngFor="let task of tasks">
+        <div class="task-info">
+          <h3>{{ task.title }}</h3>
+          <div class="meta flex gap-4">
+            <span class="date">Due: {{ task.deadlineDate }}</span>
+            <app-urgency-icon [urgency]="task.urgency"></app-urgency-icon>
+          </div>
+        </div>
+        
+        <div class="task-actions flex items-center gap-4">
+          <app-status-badge [status]="task.status"></app-status-badge>
+          
+          <div class="btn-group">
+            <button class="btn btn-sm btn-outline" *ngIf="task.status === 0" (click)="onStart(task)">Start</button>
+            <button class="btn btn-sm btn-success" *ngIf="task.status === 1" (click)="onComplete(task)">Complete</button>
+            <button class="btn btn-sm btn-outline" *ngIf="task.status === 1" (click)="onReset(task)">Reset</button>
+            <button class="btn btn-sm btn-outline" *ngIf="task.status === 2" (click)="onReopen(task)">Reopen</button>
+            <button class="btn btn-sm btn-danger-outline" *ngIf="task.status !== 3" (click)="onDelete(task)">Delete</button>
+            <button class="btn btn-sm btn-outline" *ngIf="task.status === 3" (click)="onRestore(task)">Restore</button>
+            <button class="btn btn-sm btn-danger" *ngIf="task.status === 3" (click)="onHardDelete(task)">Destroy</button>
+          </div>
+        </div>
+      </div>
+      
+      <div *ngIf="tasks.length === 0 && !loading" class="empty-state">
+        <p>No tasks found.</p>
+      </div>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="pagination flex justify-center items-center gap-4 mt-4" *ngIf="totalCount > pageSize">
+      <button class="btn btn-sm btn-outline" [disabled]="page === 1" (click)="changePage(page - 1)">Previous</button>
+      <span>Page {{ page }} of {{ totalPages }}</span>
+      <button class="btn btn-sm btn-outline" [disabled]="page === totalPages" (click)="changePage(page + 1)">Next</button>
+    </div>
